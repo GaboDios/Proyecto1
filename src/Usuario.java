@@ -9,12 +9,16 @@ public class Usuario {
     private String cuentaBancaria;
     private String paisOrigen;
 
+    //Implementacion Oberver
+    public Double notificacion;
+    public Descuentos descuentos;
+    
     // Constructor vacío
     public Usuario() {
     }
 
     // Constructor con todos los atributos
-    public Usuario(String nombreUsuario, String contrasena, String nombre, String telefono, String direccion, String cuentaBancaria, String paisOrigen) {
+    public Usuario(String nombreUsuario, String contrasena, String nombre, String telefono, String direccion, String cuentaBancaria, String paisOrigen, Descuentos descuentos) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
         this.nombre = nombre;
@@ -22,8 +26,24 @@ public class Usuario {
         this.direccion = direccion;
         this.cuentaBancaria = cuentaBancaria;
         this.paisOrigen = paisOrigen;
+	this.descuentos = descuentos;
+        notificacion = descuentos.getDescuento();
+	
     }
 
+    //falta implementar metodo notificar para Obeserver
+
+    public void actualizarDescuento(){
+	notificacion = descuentos.getDescuento();
+    }
+
+    public void mostrarDescuento(){
+	//colocar a que departamento corresponde el descuento dependiendo del origen del usuario
+	System.out.println("!felicidades tienes un descuento en:" + "del "+ notificacion);
+	
+    }
+
+    
     // Métodos Get y Set
     public String getNombreUsuario() {
         return nombreUsuario;
