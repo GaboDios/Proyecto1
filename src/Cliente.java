@@ -2,23 +2,25 @@ import java.util.UUID;
 
 public class Cliente implements Observador {
     private String nombreUsuario;
-    private String contraseña;
+    private String contrasenia;
     private String nombre;
     private String telefono;
     private String direccion;
     private String cuentaBancaria;
     private String paisOrigen;
+    private double saldoDisponible;
     private UUID idUnico;
 
     // Constructor
-    public Cliente(String nombreUsuario, String contraseña, String nombre, String telefono, String direccion, String cuentaBancaria, String paisOrigen) {
+    public Cliente(String nombreUsuario, String contrasenia, String nombre, String telefono, String direccion, String cuentaBancaria, String paisOrigen, double saldoInicial) {
         this.nombreUsuario = nombreUsuario;
-        this.contraseña = contraseña;
+        this.contrasenia = contrasenia;
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
         this.cuentaBancaria = cuentaBancaria;
         this.paisOrigen = paisOrigen;
+        this.saldoDisponible = saldoInicial;
         this.idUnico = UUID.randomUUID(); // Genera un ID único para el cliente
     }
 
@@ -31,12 +33,12 @@ public class Cliente implements Observador {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public String getNombre() {
@@ -95,13 +97,37 @@ public class Cliente implements Observador {
 
     // Método para verificar si las credenciales son correctas
     public boolean autenticar(String nombreUsuario, String contraseña) {
-        return this.nombreUsuario.equals(nombreUsuario) && this.contraseña.equals(contraseña);
+        return this.nombreUsuario.equals(nombreUsuario) && this.contrasenia.equals(contraseña);
     }
 
     // Implementación del método de la interfaz Observador
     @Override
     public void actualizar(String mensajeOferta) {
         System.out.println(nombre + " ha recibido una nueva oferta: " + mensajeOferta);
+    }
+
+    public double getSaldoDisponible() {
+        return saldoDisponible;
+    }
+
+    public void aumentarSaldo(double monto) {
+        if (monto > 0) {
+            this.saldoDisponible += monto;
+            System.out.println("Saldo aumentado en $" + monto + ". Saldo actual: $" + this.saldoDisponible);
+        } else {
+            System.out.println("El monto debe ser positivo.");
+        }
+    }
+
+    public boolean disminuirSaldo(double monto) {
+        if (monto > 0 && this.saldoDisponible >= monto) {
+            this.saldoDisponible -= monto;
+            System.out.println("Saldo disminuido en $" + monto + ". Saldo actual: $" + this.saldoDisponible);
+            return true;
+        } else {
+            System.out.println("Saldo insuficiente o monto inválido.");
+            return false;
+        }
     }
 
     // Otros métodos según sea necesario, como actualizar información, etc.
