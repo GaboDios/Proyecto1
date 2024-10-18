@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Set;
+
 public class CatalogoProxy extends Catalogo {
     private Catalogo catalogoReal;
     private boolean accesoPermitido;
@@ -9,9 +12,9 @@ public class CatalogoProxy extends Catalogo {
     }
 
     // Método para autenticar el acceso al catálogo
-    public void autenticar(String usuario, String contraseña) {
+    public void autenticar(Cliente cliente, String usuario, String contrasenia) {
         // Simulación de una validación simple de credenciales
-        if (usuario.equals("admin") && contraseña.equals("admin123")) {
+        if (cliente.getNombreUsuario().equals(usuario) && cliente.getContrasenia().equals(contrasenia)) {
             this.accesoPermitido = true;
             System.out.println("Autenticación exitosa. Acceso permitido al catálogo.");
         } else {
@@ -20,33 +23,25 @@ public class CatalogoProxy extends Catalogo {
         }
     }
 
-    // Método para mostrar el catálogo si se tiene acceso
+    // Método para obtener los departamentos si se tiene acceso
     @Override
-    public void mostrarCatalogo() {
+    public Set<String> obtenerDepartamentos() {
         if (accesoPermitido) {
-            catalogoReal.mostrarCatalogo();
+            return catalogoReal.obtenerDepartamentos();
         } else {
-            System.out.println("Acceso denegado. No tiene permiso para ver el catálogo.");
+            System.out.println("Acceso denegado. No tiene permiso para ver los departamentos.");
+            return null;
         }
     }
 
-    // Método para agregar un producto al catálogo si se tiene acceso
+    // Método para obtener productos por departamento si se tiene acceso
     @Override
-    public void agregarProducto(Producto producto) {
+    public List<Producto> obtenerProductosPorDepartamento(String departamento) {
         if (accesoPermitido) {
-            catalogoReal.agregarProducto(producto);
+            return catalogoReal.obtenerProductosPorDepartamento(departamento);
         } else {
-            System.out.println("Acceso denegado. No tiene permiso para agregar productos.");
-        }
-    }
-
-    // Método para eliminar un producto del catálogo si se tiene acceso
-    @Override
-    public void eliminarProducto(Producto producto) {
-        if (accesoPermitido) {
-            catalogoReal.eliminarProducto(producto);
-        } else {
-            System.out.println("Acceso denegado. No tiene permiso para eliminar productos.");
+            System.out.println("Acceso denegado. No tiene permiso para ver productos.");
+            return null;
         }
     }
 
@@ -60,4 +55,6 @@ public class CatalogoProxy extends Catalogo {
             return null;
         }
     }
+
+    // Otros métodos permanecen igual (agregarProducto, mostrarCatalogo, etc.)
 }

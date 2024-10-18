@@ -9,10 +9,11 @@ public class Cliente implements Observador {
     private String cuentaBancaria;
     private String paisOrigen;
     private double saldoDisponible;
+    private String departamentoDesc;
     private UUID idUnico;
 
     // Constructor
-    public Cliente(String nombreUsuario, String contrasenia, String nombre, String telefono, String direccion, String cuentaBancaria, String paisOrigen, double saldoInicial) {
+    public Cliente(String nombreUsuario, String contrasenia, String nombre, String telefono, String direccion, String cuentaBancaria, String paisOrigen, double saldoInicial, String depDesc) {
         this.nombreUsuario = nombreUsuario;
         this.contrasenia = contrasenia;
         this.nombre = nombre;
@@ -21,6 +22,7 @@ public class Cliente implements Observador {
         this.cuentaBancaria = cuentaBancaria;
         this.paisOrigen = paisOrigen;
         this.saldoDisponible = saldoInicial;
+        this.departamentoDesc = depDesc;
         this.idUnico = UUID.randomUUID(); // Genera un ID único para el cliente
     }
 
@@ -55,6 +57,10 @@ public class Cliente implements Observador {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getDepartamentoDesc(){
+        return departamentoDesc;
     }
 
     public String getDireccion() {
