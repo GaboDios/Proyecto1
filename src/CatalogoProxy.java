@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Set;
 
-public class CatalogoProxy extends Catalogo {
+public class CatalogoProxy extends Catalogo implements ICatalogo{
     private Catalogo catalogoReal;
     private boolean accesoPermitido;
 
