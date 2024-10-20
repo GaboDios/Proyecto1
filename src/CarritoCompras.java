@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
-public class CarritoCompras {
+public class CarritoCompras implements Iterable<Producto>{
     private List<Producto> productos;
 
     // Constructor
@@ -56,5 +57,10 @@ public class CarritoCompras {
     // Método para obtener la lista de productos en el carrito
     public List<Producto> obtenerProductos() {
         return productos;
+    }
+
+    @Override
+    public Iterator<Producto> iterator() {
+        return productos.iterator();
     }
 }

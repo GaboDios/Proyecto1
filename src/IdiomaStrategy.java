@@ -27,4 +27,6 @@ public interface IdiomaStrategy {
     void tarjetaBloqueada();
     void pagoRealizado(double saldo);
     void saldoInsuficiente();
+    void totalPagarNeto(double totalCarritoConDescuento);
+    void informacionProducto(String codigoBarras, String nombreProd, double precioOrig, double cantDesc, double precioDesc);
 }

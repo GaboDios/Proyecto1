@@ -135,7 +135,7 @@ public class CheemsMart {
                         idioma.elCarritoEstaVacio();
                     } else {
                         idioma.productosEnCarrito();
-                        for (Producto productoCarrito : carritoCompras.obtenerProductos()) {
+                        for (Producto productoCarrito : carritoCompras) {
                             double precioOriginal = productoCarrito.getPrecio();
                             double precioConDescuento = precioOriginal;
 
@@ -145,10 +145,7 @@ public class CheemsMart {
                             }
 
                             // Mostrar la información del producto
-                            System.out.println("Código de Barras: " + productoCarrito.getCodigoBarras() +
-                                    ", Artículo: " + productoCarrito.getNombre() +
-                                    ", Precio Original: $" + precioOriginal +
-                                    (cantidadDescuento != 1 ? ", Precio con Descuento: $" + precioConDescuento : ""));
+                            idioma.informacionProducto(productoCarrito.getCodigoBarras(),productoCarrito.getNombre(),precioOriginal,cantidadDescuento,precioConDescuento);
                         }
                         idioma.totalAPagar(carritoCompras.calcularTotal());
                     }
@@ -180,9 +177,8 @@ public class CheemsMart {
                         System.exit(0);
                     }
 
-                    // Calcular el total con descuento aplicado
                     double totalCarritoConDescuento = 0.0;
-                    for (Producto productoCarrito : carritoCompras.obtenerProductos()) {
+                    for (Producto productoCarrito : carritoCompras) {
                         double precioOriginal = productoCarrito.getPrecio();
                         double precioConDescuento = precioOriginal;
 
@@ -193,7 +189,7 @@ public class CheemsMart {
                         totalCarritoConDescuento += precioConDescuento;
                     }
 
-                    System.out.println("Total a pagar: $" + totalCarritoConDescuento);
+                    idioma.totalPagarNeto(totalCarritoConDescuento);
 
                     if (clienteActual.getSaldoDisponible() >= totalCarritoConDescuento) {
                         clienteActual.disminuirSaldo(totalCarritoConDescuento);

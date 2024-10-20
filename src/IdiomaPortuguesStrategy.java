@@ -120,4 +120,13 @@ public class IdiomaPortuguesStrategy implements IdiomaStrategy {
     public void saldoInsuficiente(){
         System.out.println("Saldo insuficiente. Não é possível realizar o pagamento.");
     }
+    public void totalPagarNeto(double totalCarritoConDescuento){
+        System.out.println("Total a pagar: $" + totalCarritoConDescuento);
+    }
+    public void informacionProducto(String codigoBarras, String nombreProd, double precioOrig, double cantDesc, double precioDesc){
+        System.out.println("Código de Barras: " + codigoBarras +
+                ", Produto: " + nombreProd +
+                ", Preço Original: R$" + precioOrig +
+                (cantDesc != 1 ? ", Preço com Desconto: R$" + precioDesc : ""));
+    }
 }

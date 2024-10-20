@@ -16,7 +16,7 @@ public class ClienteFactoryManager {
                 "5551234567",
                 "Calle Reforma 100, Ciudad de México",
                 "370467798034",
-                1000.00
+                10000.00
         );
         clientes.add(clienteMexico);
 
@@ -29,7 +29,7 @@ public class ClienteFactoryManager {
                 "5552345678",
                 "123 Main St, New York",
                 "370467798034",
-                2000.00
+                20000.00
         );
         clientes.add(clienteUSA);
 
@@ -42,7 +42,7 @@ public class ClienteFactoryManager {
                 "5553456789",
                 "Rua da Liberdade 200, São Paulo",
                 "715203160157",
-                1500.00
+                15000.00
         );
         clientes.add(clienteBrasil);
 

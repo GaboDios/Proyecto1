@@ -120,4 +120,13 @@ public class IdiomaInglesStrategy implements IdiomaStrategy {
     public void saldoInsuficiente(){
         System.out.println("Insufficient funds. Payment cannot be processed.");
     }
+    public void totalPagarNeto(double totalCarritoConDescuento){
+        System.out.println("Total to pay: $" + totalCarritoConDescuento);
+    }
+    public void informacionProducto(String codigoBarras, String nombreProd, double precioOrig, double cantDesc, double precioDesc){
+        System.out.println("Barcode: " + codigoBarras +
+                ", Product: " + nombreProd +
+                ", Original Price: $" + precioOrig +
+                (cantDesc != 1 ? ", Discounted Price: $" + precioDesc : ""));
+    }
 }
