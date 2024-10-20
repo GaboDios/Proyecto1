@@ -5,30 +5,24 @@ import java.util.Scanner;
 
 public class CheemsMart {
 
-    // Método main
     public static void main(String[] args) {
-        // Se inicializa el proxy
         CatalogoProxy catalogoProxy = new CatalogoProxy();
 
-        // Crear lista de clientes
         List<Cliente> clientes = ClienteFactoryManager.crearClientes();
 
-        // Escáner para entrada de datos
         Scanner scanner = new Scanner(System.in);
 
-        // Validación de usuario
         Cliente clienteActual = null;
         CarritoCompras carritoCompras = new CarritoCompras();
         String nombreUsuario = null;
-        IdiomaStrategy idioma = new IdiomaEspanolStrategy(); // Estrategia por defecto
+        IdiomaStrategy idioma = new IdiomaEspanolStrategy();
 
-        idioma.imprimirBienvenida(); // Mensaje de bienvenida en varios idiomas
+        idioma.imprimirBienvenida();
 
         while (clienteActual == null) {
             idioma.imprimirMensajeUsuario();
             nombreUsuario = scanner.nextLine();
 
-            // Buscar el cliente por nombre de usuario
             for (Cliente cliente : clientes) {
                 if (cliente.getNombreUsuario().equals(nombreUsuario)) {
                     clienteActual = cliente;
@@ -41,10 +35,8 @@ public class CheemsMart {
             }
         }
 
-        // Una vez autenticado, obtener la estrategia de idioma según el país del cliente
         idioma = IdiomaFactory.obtenerIdioma(clienteActual.getPaisOrigen());
 
-        // Validación de contraseña con 3 intentos
         int intentosRestantes = 3;
         boolean accesoConcedido = false;
         String contrasenia = null;
@@ -69,7 +61,6 @@ public class CheemsMart {
 
         catalogoProxy.autenticar(clienteActual, nombreUsuario, contrasenia);
 
-        // Asignación de descuento aleatorio
         Random random = new Random();
         int tieneDescuento = random.nextInt(2); // 0 o 1
         double cantidadDescuento;
@@ -78,13 +69,12 @@ public class CheemsMart {
             cantidadDescuento = 0.05 + (0.75 - 0.05) * random.nextDouble(); // Descuento entre 0.05 y 0.75
             idioma.imprimirMensajeDescuento(cantidadDescuento, clienteActual.getDepartamentoDesc());
         } else {
-            cantidadDescuento = 1; // Sin descuento
+            cantidadDescuento = 1;
             idioma.imprimirMensajeSinDescuento();
         }
 
         boolean salir = false;
 
-        // Menú de opciones principal
         while (!salir) {
             idioma.imprimirMenuOpciones();
             String opcion = scanner.nextLine();
@@ -110,7 +100,7 @@ public class CheemsMart {
 
                         idioma.productosEnDepartamentoSelec(departamentoSeleccionado);
                         for (Producto producto : productosDepartamento) {
-                            System.out.println("Código de Barras: " + producto.getCodigoBarras() + ", Nombre: " + producto.getNombre() + ", Precio: $" + producto.getPrecio());
+                            System.out.println("Codigo de Barras: " + producto.getCodigoBarras() + ", Nombre: " + producto.getNombre() + ", Precio: $" + producto.getPrecio());
                         }
                     }
                     break;
@@ -139,12 +129,10 @@ public class CheemsMart {
                             double precioOriginal = productoCarrito.getPrecio();
                             double precioConDescuento = precioOriginal;
 
-                            // Aplicar el descuento si es necesario
                             if (cantidadDescuento != 1) {
                                 precioConDescuento = Math.round((precioOriginal * (1 - cantidadDescuento)) * 100.0) / 100.0;
                             }
 
-                            // Mostrar la información del producto
                             idioma.informacionProducto(productoCarrito.getCodigoBarras(),productoCarrito.getNombre(),precioOriginal,cantidadDescuento,precioConDescuento);
                         }
                         idioma.totalAPagar(carritoCompras.calcularTotal());
@@ -195,6 +183,7 @@ public class CheemsMart {
                         clienteActual.disminuirSaldo(totalCarritoConDescuento);
                         idioma.pagoRealizado(clienteActual.getSaldoDisponible());
                         carritoCompras.vaciarCarrito();
+                        idioma.tiempoDeEntrega(clienteActual.getDireccion());
                     } else {
                         idioma.saldoInsuficiente();
                     }
