@@ -127,6 +127,7 @@ public class Cliente implements Observador {
 
     public boolean disminuirSaldo(double monto) {
         if (monto > 0 && this.saldoDisponible >= monto) {
+            System.out.println(monto);
             this.saldoDisponible -= monto;
             System.out.println("Saldo disminuido en $" + monto + ". Saldo actual: $" + this.saldoDisponible);
             return true;
@@ -136,5 +137,4 @@ public class Cliente implements Observador {
         }
     }
 
-    // Otros métodos según sea necesario, como actualizar información, etc.
 }

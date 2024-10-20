@@ -1,0 +1,30 @@
+public interface IdiomaStrategy {
+    void imprimirBienvenida();
+    void imprimirMensajeUsuario();
+    void imprimirMensajeUsuarioNoEncontrado();
+    void imprimirMensajeContrasenia();
+    void imprimirMensajeAccesoConcedido(String nombreCliente);
+    void imprimirMensajeContraseniaIncorrecta(int intentosRestantes);
+    void imprimirMensajeIntentosFallidos();
+    void imprimirMensajeDescuento(double cantidadDescuento, String departamentoDesc);
+    void imprimirMensajeSinDescuento();
+    void imprimirMenuOpciones();
+    void imprimirMensajeAgregarCarrito();
+    void imprimirMensajeCodigoNoValido();
+    void imprimirMensajeRevisarCarrito();
+    void imprimirMensajeSaldoDisponible(double saldo);
+    void imprimirMensajeDespedida();
+    void departamentosDisponibles();
+    void seleccionarDepartamento();
+    void productosEnDepartamentoSelec(String departamento);
+    void ingresarCodigoDeBarras();
+    void elCarritoEstaVacio();
+    void productosEnCarrito();
+    void totalAPagar(double totalPagar);
+    void ingresarCuentaBancaria();
+    void cuentaVerificada();
+    void cuentaIncorrecta(int intentosCuenta);
+    void tarjetaBloqueada();
+    void pagoRealizado(double saldo);
+    void saldoInsuficiente();
+}
