@@ -1,6 +1,6 @@
 import java.util.UUID;
 
-public class Cliente implements Observador {
+public class Cliente {
     private String nombreUsuario;
     private String contrasenia;
     private String nombre;
@@ -104,12 +104,6 @@ public class Cliente implements Observador {
     // Método para verificar si las credenciales son correctas
     public boolean autenticar(String nombreUsuario, String contraseña) {
         return this.nombreUsuario.equals(nombreUsuario) && this.contrasenia.equals(contraseña);
-    }
-
-    // Implementación del método de la interfaz Observador
-    @Override
-    public void actualizar(String mensajeOferta) {
-        System.out.println(nombre + " ha recibido una nueva oferta: " + mensajeOferta);
     }
 
     public double getSaldoDisponible() {
