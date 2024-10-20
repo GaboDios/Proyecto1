@@ -2,11 +2,11 @@ import java.util.List;
 import java.util.Set;
 
 public class CatalogoProxy extends Catalogo implements ICatalogo{
-    private Catalogo catalogoReal;
+    private ICatalogo catalogoReal;
     private boolean accesoPermitido;
 
     // Constructor
-    public CatalogoProxy(Catalogo catalogoReal) {
+    public CatalogoProxy(ICatalogo catalogoReal) {
         this.catalogoReal = catalogoReal;
         this.accesoPermitido = false; // El acceso está restringido inicialmente
     }

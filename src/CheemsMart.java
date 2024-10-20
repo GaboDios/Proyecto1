@@ -1,5 +1,3 @@
-import com.sun.tools.jconsole.JConsoleContext;
-
 import java.util.List;
 import java.util.Set;
 import java.util.Random;
@@ -10,42 +8,10 @@ public class CheemsMart {
     // Método main
     public static void main(String[] args) {
         // Se inicializa el proxy
-        CatalogoProxy catalogoProxy = new CatalogoProxy(crearCatalogo());
-        // Cliente de México
-        ClienteFactory mexicoFactory = new ClienteMexicoFactory();
-        Cliente clienteMexico = mexicoFactory.crearCliente(
-                "JuanPerez",
-                "37RZ80",
-                "Juan Perez",
-                "5551234567",
-                "Calle Reforma 100, Ciudad de México",
-                "370467798034",
-                1000.00
-        );
+        ICatalogo catalogoReal = CatalogoFactory.crearCatalogo();
+        CatalogoProxy catalogoProxy = new CatalogoProxy(catalogoReal);
 
-        // Cliente de Estados Unidos
-        ClienteFactory usaFactory = new ClienteEEUUFactory();
-        Cliente clienteUSA = usaFactory.crearCliente(
-                "JohnSmith",
-                "62A4X9",
-                "John Smith",
-                "5552345678",
-                "123 Main St, New York",
-                "370467798034",
-                2000.00
-        );
-
-        // Cliente de Brasil
-        ClienteFactory brasilFactory = new ClienteBrasilFactory();
-        Cliente clienteBrasil = brasilFactory.crearCliente(
-                "RafaelaSantos",
-                "J7O78E",
-                "Rafaela Santos",
-                "5553456789",
-                "Rua da Liberdade 200, São Paulo",
-                "715203160157",
-                1500.00
-        );
+        List<Cliente> clientes = ClienteFactoryManager.crearClientes();
 
         // Mensaje de bienvenida en tres idiomas
         System.out.println("Bienvenido a CheemsMart");
@@ -54,9 +20,7 @@ public class CheemsMart {
 
         // Escáner para entrada de datos
         Scanner scanner = new Scanner(System.in);
-
-        Cliente[] clientes = {clienteMexico, clienteUSA, clienteBrasil};
-
+        
         // Validación de usuario
         Cliente clienteActual = null;
         CarritoCompras carritoCompras = new CarritoCompras();
@@ -296,56 +260,6 @@ public class CheemsMart {
             }
         }
 
-    }
-
-    public static Catalogo crearCatalogo() {
-        Catalogo catalogo = new Catalogo();
-
-        // Agregar productos al catálogo
-
-        // Electrónica
-        catalogo.agregarProducto(new Producto("001", "Televisor", "Electrónica", 500.00));
-        catalogo.agregarProducto(new Producto("002", "Smartphone", "Electrónica", 700.00));
-        catalogo.agregarProducto(new Producto("003", "Laptop", "Electrónica", 900.00));
-        catalogo.agregarProducto(new Producto("004", "Audífonos", "Electrónica", 50.00));
-        catalogo.agregarProducto(new Producto("005", "Tablet", "Electrónica", 300.00));
-
-        // Electrodomésticos
-        catalogo.agregarProducto(new Producto("006", "Refrigerador", "Electrodoméstico", 1200.00));
-        catalogo.agregarProducto(new Producto("007", "Lavadora", "Electrodoméstico", 800.00));
-        catalogo.agregarProducto(new Producto("008", "Microondas", "Electrodoméstico", 150.00));
-        catalogo.agregarProducto(new Producto("009", "Horno", "Electrodoméstico", 500.00));
-        catalogo.agregarProducto(new Producto("010", "Aspiradora", "Electrodoméstico", 200.00));
-
-        // Productos alimenticios
-        catalogo.agregarProducto(new Producto("011", "Cereal", "Producto alimenticio", 5.00));
-        catalogo.agregarProducto(new Producto("012", "Arroz", "Producto alimenticio", 2.00));
-        catalogo.agregarProducto(new Producto("013", "Leche", "Producto alimenticio", 1.50));
-        catalogo.agregarProducto(new Producto("014", "Pan", "Producto alimenticio", 1.00));
-        catalogo.agregarProducto(new Producto("015", "Mantequilla", "Producto alimenticio", 3.00));
-
-        // Ropa
-        catalogo.agregarProducto(new Producto("016", "Camiseta", "Ropa", 20.00));
-        catalogo.agregarProducto(new Producto("017", "Pantalón", "Ropa", 40.00));
-        catalogo.agregarProducto(new Producto("018", "Chaqueta", "Ropa", 60.00));
-        catalogo.agregarProducto(new Producto("019", "Zapatos", "Ropa", 80.00));
-        catalogo.agregarProducto(new Producto("020", "Sombrero", "Ropa", 15.00));
-
-        // Muebles
-        catalogo.agregarProducto(new Producto("021", "Sofá", "Muebles", 400.00));
-        catalogo.agregarProducto(new Producto("022", "Mesa", "Muebles", 150.00));
-        catalogo.agregarProducto(new Producto("023", "Silla", "Muebles", 50.00));
-        catalogo.agregarProducto(new Producto("024", "Cama", "Muebles", 300.00));
-        catalogo.agregarProducto(new Producto("025", "Escritorio", "Muebles", 200.00));
-
-        // Juguetes
-        catalogo.agregarProducto(new Producto("026", "Pelota", "Juguetes", 10.00));
-        catalogo.agregarProducto(new Producto("027", "Muñeca", "Juguetes", 25.00));
-        catalogo.agregarProducto(new Producto("028", "Auto de juguete", "Juguetes", 15.00));
-        catalogo.agregarProducto(new Producto("029", "Rompecabezas", "Juguetes", 8.00));
-        catalogo.agregarProducto(new Producto("030", "Juego de mesa", "Juguetes", 30.00));
-
-        return catalogo;
     }
 
     // Método para obtener la estrategia de descuento según el país
