@@ -1,13 +1,13 @@
 import java.util.List;
 import java.util.Set;
 
-public class CatalogoProxy extends Catalogo implements ICatalogo{
+public class CatalogoProxy implements ICatalogo{
     private ICatalogo catalogoReal;
     private boolean accesoPermitido;
 
     // Constructor
-    public CatalogoProxy(ICatalogo catalogoReal) {
-        this.catalogoReal = catalogoReal;
+    public CatalogoProxy() {
+        this.catalogoReal = Catalogo.getInstancia(); // Usar la instancia Singleton de Catalogo
         this.accesoPermitido = false; // El acceso está restringido inicialmente
     }
 
@@ -56,5 +56,24 @@ public class CatalogoProxy extends Catalogo implements ICatalogo{
         }
     }
 
-    // Otros métodos permanecen igual (agregarProducto, mostrarCatalogo, etc.)
+    @Override
+    public List<Producto> obtenerProductos() {
+        if (accesoPermitido) {
+            return catalogoReal.obtenerProductos();
+        } else {
+            System.out.println("Acceso denegado. No tiene permiso para ver los productos.");
+            return null;
+        }
+    }
+
+    @Override
+    public void agregarProducto(Producto producto) {
+        throw new UnsupportedOperationException("Operación no permitida: No se pueden agregar productos a través del proxy.");
+    }
+
+    @Override
+    public void eliminarProducto(Producto producto) {
+        throw new UnsupportedOperationException("Operación no permitida: No se pueden eliminar productos a través del proxy.");
+    }
+
 }

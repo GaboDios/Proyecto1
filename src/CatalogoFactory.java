@@ -1,9 +1,7 @@
 public class CatalogoFactory {
 
     // Método estático para crear y poblar un catálogo
-    public static Catalogo crearCatalogo() {
-        Catalogo catalogo = new Catalogo();
-
+    public static Catalogo poblarCatalogo(Catalogo catalogo) {
         // Agregar productos al catálogo
 
         // Electrónica

@@ -8,8 +8,7 @@ public class CheemsMart {
     // Método main
     public static void main(String[] args) {
         // Se inicializa el proxy
-        ICatalogo catalogoReal = CatalogoFactory.crearCatalogo();
-        CatalogoProxy catalogoProxy = new CatalogoProxy(catalogoReal);
+        CatalogoProxy catalogoProxy = new CatalogoProxy();
 
         List<Cliente> clientes = ClienteFactoryManager.crearClientes();
 
@@ -20,7 +19,7 @@ public class CheemsMart {
 
         // Escáner para entrada de datos
         Scanner scanner = new Scanner(System.in);
-        
+
         // Validación de usuario
         Cliente clienteActual = null;
         CarritoCompras carritoCompras = new CarritoCompras();

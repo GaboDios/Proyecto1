@@ -4,11 +4,21 @@ import java.util.List;
 import java.util.Set;
 
 public class Catalogo implements ICatalogo{
+    private static Catalogo instanciaUnica;
     private List<Producto> productos;
 
     // Constructor
-    public Catalogo() {
+    private Catalogo() {
         this.productos = new ArrayList<>();
+    }
+
+    public static synchronized Catalogo getInstancia() {
+        if (instanciaUnica == null) {
+            instanciaUnica = new Catalogo();
+            // Poblar el catálogo la primera vez que se crea la instancia
+            CatalogoFactory.poblarCatalogo(instanciaUnica);// Se crea solo la primera vez que se solicita
+        }
+        return instanciaUnica;
     }
 
     // Método para agregar un producto al catálogo
